@@ -1,0 +1,29 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+body{
+  background-color: var(--bs-gray-900);
+  color: var(--bs-teal);
+}
+
+.App {
+  text-align: center;
+}
+
+.todo-container{
+  display: flex;
+}
+
+.todo-wraper{
+  background-color: var(--bs-gray-800);
+  padding: 2%;
+  width: 40em;
+  margin: 3% 3% 0 0;
+  overflow: auto;
+  box-shadow: 0px 5px 7px var(--bs-dark);
+  max-height: 80vh;
+}
