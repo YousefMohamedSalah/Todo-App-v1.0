@@ -1,0 +1,55 @@
+.edit-wraper{
+    background-color: #3c424a;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-top: 10px;
+    box-shadow: 0 3px 5px var(--bs-gray-900);
+    flex-shrink: 2px;
+}
+
+.edit-wraper .input-update{
+    padding: 8px;
+    border: none;
+    background-color: var(--bs-gray-800);
+    color: var(--bs-white);
+    width: 25em;
+    margin: 1em;
+}
+
+.edit-wraper .input-update::placeholder{
+    color: var(--bs-white);
+}
+
+.edit-wraper .input-update:focus{
+    outline: 1px solid #20c99794;
+}
+
+.edit-wraper .input-update-description {
+    resize: none;
+}
+
+.edit-wraper .btn-update {
+    background: none;
+    border: none;
+    outline: 1px solid var(--bs-teal);
+    color: var(--bs-teal);
+    border-radius: 5px;
+    margin-bottom: 25px;
+    padding: 10px;
+    width: 60px;
+    cursor: pointer;
+        margin-left: 90%;
+}
+
+.edit-wraper .btn-update:hover{
+    background-color: #11a478;
+    color: var(--bs-gray-100);
+    outline: none;
+}
+
+.edit-wraper .btn-update:focus{
+    outline: 1px solid var(--bs-teal);
+}

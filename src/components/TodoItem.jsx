@@ -4,21 +4,23 @@ import { BsCheckLg } from "react-icons/bs";
 
 import { LiaClipboardListSolid } from "react-icons/lia";
 
-function TodoItem({Todos, setTodos,  index,title,description, Completed, setCompleted, isCompleteScreen, CompletedOn, order}) {
+import { AiOutlineEdit } from 'react-icons/ai'
 
-    let  todoList = [...Todos]
+function TodoItem(props) {
 
-    let completeTodoList = [...Completed]
+    let  todoList = [...props.Todos]
+
+    let completeTodoList = [...props.Completed]
 
     let handleDeleteItem = () =>{
         
-        if (!isCompleteScreen){
-        todoList.splice(index,1)
-        setTodos(todoList)
+        if (!props.isCompleteScreen){
+        todoList.splice(props.index,1)
+        props.setTodos(todoList)
         localStorage.setItem('todolist', JSON.stringify(todoList))
         }else{
-        completeTodoList.splice(index,1)
-        setCompleted(completeTodoList)
+        completeTodoList.splice(props.index,1)
+        props.setCompleted(completeTodoList)
         localStorage.setItem('completedtodolist',JSON.stringify(completeTodoList))
         }
     }
@@ -30,45 +32,51 @@ function TodoItem({Todos, setTodos,  index,title,description, Completed, setComp
         let CompleteDate = `Completed ${dd}-${mm}-${yyyy} at ${h}:${m}:${s}`
 
         let filteredItem = {
-            ...Todos[index],
+            ...props.Todos[props.index],
             CompletedOn:CompleteDate,
-            order:index
+            order:props.index
         }
 
         completeTodoList.push(filteredItem)
         
-        todoList.splice(index,1)
-        setTodos(todoList)
+        todoList.splice(props.index,1)
+        props.setTodos(todoList)
         localStorage.setItem('todolist', JSON.stringify(todoList))
 
-        setCompleted(completeTodoList)
+        props.setCompleted(completeTodoList)
         localStorage.setItem('completedtodolist',JSON.stringify(completeTodoList))
     }
 
+    let handleEditItem = () => {
+        props.setCurrentEdit(props.index)
+        props.setCurrentEditedItem([...props.Todos][props.index])
+    }
+
+
     let handleUnCompleteItem = () =>{
-        let UncompleteItem = completeTodoList.at(index)
-        completeTodoList.splice(index,1)
-        setCompleted(completeTodoList)
+        let UncompleteItem = completeTodoList.at(props.index)
+        completeTodoList.splice(props.index,1)
+        props.setCompleted(completeTodoList)
         localStorage.setItem('completedtodolist',JSON.stringify(completeTodoList))
 
-        todoList.splice(order,0,UncompleteItem)
-        setTodos(todoList)
+        todoList.splice(props.order,0,UncompleteItem)
+        props.setTodos(todoList)
         localStorage.setItem('todolist',JSON.stringify(todoList))
     }
 
     return (
         <>
-            <div className="todo-item" key={index}>
+            <div className="todo-item" key={props.index}>
                 <div>
-                    <h3>{title}</h3>
-                    <p>{isCompleteScreen ? <del>{description}</del> : description}</p>
-                    {isCompleteScreen && <p><i>{CompletedOn}</i></p>}
+                    <h3>{props.title}</h3>
+                    <p>{props.isCompleteScreen ? <del>{props.description}</del> : props.description}</p>
+                    {props.isCompleteScreen && <p><i>{props.CompletedOn}</i></p>}
                 </div>
                 <div>
                     <AiOutlineDelete onClick={() => handleDeleteItem()} className="icon" />
-                    {(!isCompleteScreen) && <BsCheckLg onClick={() => handleCompleteItem()} className="check-icon" /> }
-                    {(isCompleteScreen) && <LiaClipboardListSolid onClick={() => handleUnCompleteItem()} className="check-icon"/>}
-
+                    {(!props.isCompleteScreen) && <BsCheckLg onClick={() => handleCompleteItem()} className="check-icon" /> }
+                    {(!props.isCompleteScreen) && <AiOutlineEdit onClick={() => handleEditItem()} className="check-icon"/>}
+                    {(props.isCompleteScreen) && <LiaClipboardListSolid onClick={() => handleUnCompleteItem()} className="check-icon"/>}
                     
                 </div>
             </div>
